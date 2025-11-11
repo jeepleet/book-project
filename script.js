@@ -5,10 +5,7 @@ function Books(title, author, pages, id) {
     this.id = id;
 }
 
-
 const myLibrary = [];
-
-
 
 function addBookToMyLibrary(title, author, pages,) {
 let uuid = crypto.randomUUID()
@@ -42,5 +39,30 @@ const bookList = document.querySelector("#book-list");
 }
 displayBooks();
 
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+const closeButton = document.querySelector("dialog button");
+const submitBook = document.querySelector("#submitnewbook");
+const nameOfBookField = document.querySelector("#bookname"); // Inside the form
+const nameOfAuthorField = document.querySelector("#author"); // Inside the form
+const amountOfPagesField = document.querySelector("#pages"); // Inside the form
 
+
+showButton.addEventListener("click" , () => { 
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});
+
+submitBook.addEventListener("submit", () => {
+   event.preventDefault();
+   let inputFieldBook = nameOfBookField.value;
+   let inputFieldAuthor = nameOfAuthorField.value;
+   let inputFieldPages = amountOfPagesField.value; 
+   console.log(inputFieldBook, inputFieldAuthor, inputFieldPages);
+    addBookToMyLibrary(inputFieldBook, inputFieldAuthor, inputFieldPages);
+     });
+    
 

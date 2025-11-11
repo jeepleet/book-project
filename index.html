@@ -20,14 +20,29 @@
         </tbody>
     </table>
 
-    <div class = "input">
-        <input id="Title" placeholder="Type in book name here">
-        <input id="Author" placeholder="Type in Author name here">
-        <input id="Pages" placeholder="Type in the numbers of pages">
+    <dialog>
+        <button autofocus>Close</button>
+        <form id="submitnewbook">
+            <div class = "bookname">
+                 <label for="bookname">Name of Book</label><br>
+            <input type="text" id="bookname" name="Book name">
+            </div>
+           
+            <div class = "authorname">
+                  <label for="author">Name of Author</label><br>
+            <input type="text" id="author" name="author">
+            </div>
+            
+            <div class = "pages">
+                <label for="pages">Amount of pages</label><br>
+            <input type="text" id="pages" name="pages">
 
-        <button class = "submit">Submit book here</button>
-    
-    </div>
+            </div>
+            <input type="submit" id="submitbook" value="Submit new Book">
+        </form>
+    </dialog>
+    <button>Add a new Book</button>
+
     <script src="script.js"></script>
 </body>
 </html>
