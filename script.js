@@ -34,6 +34,7 @@ bookList.innerHTML = ""; // Clear bookList, so we dont get double displaying old
         let tdToggleButton = currentBook.read;
         tdToggleButton = document.createElement("button");
         tdToggleButton.classList.add("togglebtn");
+        tdToggleButton.id = currentBook.id;
         if (currentBook.read === true) {
         tdToggleButton.textContent = "Has read";
         } else {
@@ -59,6 +60,8 @@ const nameOfAuthorField = document.querySelector("#author"); // Inside the form
 const amountOfPagesField = document.querySelector("#pages"); // Inside the form
 const bookCheckboxRead = document.querySelector("#checkbox");
 const removeBook = document.querySelector("#book-list");
+const removeAllBooks = document.querySelector(".removeall");
+const formErrorOnSubmitBook = document.querySelector("#formerror");
 
 
 
@@ -72,14 +75,23 @@ closeButton.addEventListener("click", () => {
 
 submitBook.addEventListener("submit", () => {
    event.preventDefault();
-   let inputFieldBook = nameOfBookField.value;
+
+    let inputFieldBook = nameOfBookField.value;
    let inputFieldAuthor = nameOfAuthorField.value;
    let inputFieldPages = amountOfPagesField.value;
    let checkboxReadBook = bookCheckboxRead.checked;
-    addBookToMyLibrary(inputFieldBook, inputFieldAuthor, inputFieldPages, checkboxReadBook);
+
+   if (inputFieldAuthor === "" || inputFieldBook === "" || inputFieldPages === "") {
+    formErrorOnSubmitBook.textContent = "All fields are required to submit book";
+    formErrorOnSubmitBook.style.color = "red";
+    formErrorOnSubmitBook.style.fontSize = "20px";
+
+} else {
+       addBookToMyLibrary(inputFieldBook, inputFieldAuthor, inputFieldPages, checkboxReadBook);
     displayBooks();
-    console.log(checkboxReadBook)
-     });
+    console.log(checkboxReadBook, inputFieldAuthor, inputFieldBook, inputFieldPages)
+}
+});
 
 removeBook.addEventListener("click", (e) => {
     const button = e.target.closest("button");
@@ -98,10 +110,23 @@ removeBook.addEventListener("click", (e) => {
         const toggleButton = myLibrary[buttonToggle];
         toggleButton.toggleRead();
         displayBooks();
+
+
     });
 
 
 Books.prototype.toggleRead = function() {
     this.read = !this.read;
     }
+
+
+removeAllBooks.addEventListener("click", () => {
+    removeBook.innerHTML = "";
+    myLibrary.length = 0;
+
+    console.log(myLibrary)
+    
+});
+   
+
     
